@@ -1,0 +1,5 @@
+@extends('layouts.admin') @section('title', 'Paiements') @section('breadcrumb')<li class="breadcrumb-item active">Paiements</li>@endsection
+@section('content')
+<h4 class="fw-700 mb-4"><i class="fas fa-credit-card text-cb-primary me-2"></i>Paiements</h4>
+<div class="card-cabform"><div class="table-responsive"><table class="table table-cabform mb-0"><thead><tr><th>Transaction</th><th>Utilisateur</th><th>Montant</th><th>Canal</th><th>Statut</th><th>Date</th></tr></thead><tbody>@forelse($payments as $p)<tr><td class="fw-600">{{ $p->transaction_id }}</td><td>{{ $p->user->full_name ?? '-' }}</td><td class="fw-700 text-cb-success">{{ number_format($p->amount, 0, ',', ' ') }} FCFA</td><td>{{ $p->channel_label }}</td><td><span class="badge-cabform {{ $p->status === 'completed' ? 'badge-success' : 'badge-warning' }}">{{ ucfirst($p->status) }}</span></td><td class="text-cb-muted" style="font-size:0.85rem;">{{ $p->created_at?->format('d/m/Y') }}</td></tr>@empty<tr><td colspan="6" class="text-center text-cb-muted py-4">Aucun paiement.</td></tr>@endforelse</tbody></table></div><div class="p-3">{{ $payments->withQueryString()->links() }}</div></div>
+@endsection

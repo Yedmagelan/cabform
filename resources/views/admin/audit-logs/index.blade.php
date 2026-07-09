@@ -1,0 +1,5 @@
+@extends('layouts.admin') @section('title', 'Journal d\'audit') @section('breadcrumb')<li class="breadcrumb-item active">Audit</li>@endsection
+@section('content')
+<h4 class="fw-700 mb-4"><i class="fas fa-history text-cb-primary me-2"></i>Journal d'audit</h4>
+<div class="card-cabform"><div class="table-responsive"><table class="table table-cabform mb-0"><thead><tr><th>Utilisateur</th><th>Action</th><th>Description</th><th>IP</th><th>Date</th></tr></thead><tbody>@forelse($logs as $l)<tr><td>{{ $l->user->full_name ?? 'Système' }}</td><td><span class="badge-cabform badge-primary">{{ $l->action }}</span></td><td class="text-cb-muted" style="font-size:0.85rem;">{{ $l->description }}</td><td class="text-cb-muted" style="font-size:0.85rem;">{{ $l->ip_address }}</td><td class="text-cb-muted" style="font-size:0.85rem;">{{ $l->created_at?->format('d/m/Y H:i') }}</td></tr>@empty<tr><td colspan="5" class="text-center text-cb-muted py-4">Aucun log.</td></tr>@endforelse</tbody></table></div><div class="p-3">{{ $logs->links() }}</div></div>
+@endsection

@@ -1,0 +1,5 @@
+@extends('layouts.admin') @section('title', 'Pages') @section('breadcrumb')<li class="breadcrumb-item active">Pages</li>@endsection
+@section('content')
+<div class="d-flex justify-content-between align-items-center mb-4"><h4 class="fw-700 mb-0"><i class="fas fa-file-alt text-cb-primary me-2"></i>Pages CMS</h4><a href="#" class="btn btn-cabform btn-cabform-primary btn-cabform-sm"><i class="fas fa-plus me-1"></i>Nouvelle page</a></div>
+<div class="card-cabform p-4">@forelse($pages as $p)<div class="d-flex justify-content-between align-items-center py-2 border-bottom" style="border-color:var(--cb-glass-border)!important;"><div><span class="fw-600">{{ $p->title }}</span><br><span class="text-cb-muted" style="font-size:0.8rem;">/page/{{ $p->slug }}</span></div><span class="badge-cabform {{ $p->status === 'published' ? 'badge-success' : 'badge-warning' }}">{{ ucfirst($p->status) }}</span></div>@empty<p class="text-cb-muted text-center">Aucune page.</p>@endforelse<div class="mt-3">{{ $pages->links() }}</div></div>
+@endsection

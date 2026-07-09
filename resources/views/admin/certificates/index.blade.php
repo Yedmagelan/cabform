@@ -1,0 +1,5 @@
+@extends('layouts.admin') @section('title', 'Certificats') @section('breadcrumb')<li class="breadcrumb-item active">Certificats</li>@endsection
+@section('content')
+<h4 class="fw-700 mb-4"><i class="fas fa-award text-cb-warning me-2"></i>Certificats délivrés</h4>
+<div class="card-cabform"><div class="table-responsive"><table class="table table-cabform mb-0"><thead><tr><th>Numéro</th><th>Titulaire</th><th>Formation</th><th>Score</th><th>Statut</th><th>Date</th></tr></thead><tbody>@forelse($certificates as $c)<tr><td class="fw-600">{{ $c->certificate_number }}</td><td>{{ $c->user->full_name ?? '-' }}</td><td>{{ Str::limit($c->course->title ?? '-', 30) }}</td><td>{{ $c->final_score }}%</td><td><span class="badge-cabform badge-success">{{ ucfirst($c->status) }}</span></td><td class="text-cb-muted" style="font-size:0.85rem;">{{ $c->issued_at?->format('d/m/Y') }}</td></tr>@empty<tr><td colspan="6" class="text-center text-cb-muted py-4">Aucun certificat.</td></tr>@endforelse</tbody></table></div><div class="p-3">{{ $certificates->withQueryString()->links() }}</div></div>
+@endsection

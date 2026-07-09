@@ -1,0 +1,5 @@
+@extends('layouts.admin') @section('title', 'Blog') @section('breadcrumb')<li class="breadcrumb-item active">Blog</li>@endsection
+@section('content')
+<div class="d-flex justify-content-between align-items-center mb-4"><h4 class="fw-700 mb-0"><i class="fas fa-newspaper text-cb-primary me-2"></i>Articles de Blog</h4><a href="#" class="btn btn-cabform btn-cabform-primary btn-cabform-sm"><i class="fas fa-plus me-1"></i>Nouvel article</a></div>
+<div class="card-cabform p-4">@forelse($posts as $p)<div class="d-flex justify-content-between align-items-center py-2 border-bottom" style="border-color:var(--cb-glass-border)!important;"><div><span class="fw-600">{{ $p->title }}</span><br><span class="text-cb-muted" style="font-size:0.8rem;">Par {{ $p->author->full_name ?? '-' }} — {{ $p->published_at?->format('d/m/Y') ?? 'Non publié' }}</span></div><span class="badge-cabform {{ $p->status === 'published' ? 'badge-success' : 'badge-warning' }}">{{ ucfirst($p->status) }}</span></div>@empty<p class="text-cb-muted text-center">Aucun article.</p>@endforelse<div class="mt-3">{{ $posts->links() }}</div></div>
+@endsection

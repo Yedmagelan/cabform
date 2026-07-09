@@ -1,0 +1,5 @@
+@extends('layouts.admin') @section('title', 'Commandes') @section('breadcrumb')<li class="breadcrumb-item active">Commandes</li>@endsection
+@section('content')
+<h4 class="fw-700 mb-4"><i class="fas fa-shopping-cart text-cb-primary me-2"></i>Commandes</h4>
+<div class="card-cabform"><div class="table-responsive"><table class="table table-cabform mb-0"><thead><tr><th>N° Commande</th><th>Client</th><th>Total</th><th>Statut</th><th>Date</th></tr></thead><tbody>@forelse($orders as $o)<tr><td class="fw-600">{{ $o->order_number }}</td><td>{{ $o->user->full_name ?? '-' }}</td><td class="fw-700">{{ $o->formatted_total }}</td><td><span class="badge-cabform {{ $o->status === 'paid' ? 'badge-success' : 'badge-warning' }}">{{ ucfirst($o->status) }}</span></td><td class="text-cb-muted" style="font-size:0.85rem;">{{ $o->created_at?->format('d/m/Y') }}</td></tr>@empty<tr><td colspan="5" class="text-center text-cb-muted py-4">Aucune commande.</td></tr>@endforelse</tbody></table></div><div class="p-3">{{ $orders->withQueryString()->links() }}</div></div>
+@endsection
