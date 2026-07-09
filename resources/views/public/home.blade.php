@@ -75,18 +75,23 @@
             </div>
 
             <!-- Categories Container -->
-            <div class="categories-container-explore p-4 mx-auto fade-in">
+            <div class="categories-container-explore bg-glass border-glass rounded-cb p-4 mx-auto fade-in shadow-sm mt-4" style="max-width: 900px;">
                 <div class="d-flex flex-wrap justify-content-center gap-3 align-items-center">
                     @foreach($categories as $index => $category)
                         <a href="{{ route('catalog', ['category' => $category->slug]) }}" 
-                           class="category-pill-explore d-flex align-items-center gap-2 px-3 py-2 text-decoration-none rounded-cb transition {{ $index === 0 ? 'active' : '' }}"
+                           class="category-pill-explore d-flex align-items-center gap-2 px-4 py-2 text-decoration-none transition"
                            style="
-                             color: {{ $index === 0 ? '#fd8105ff' : 'var(--cb-text-primary)' }} !important; 
+                             background: transparent;
+                             border: 1px solid rgba(5, 0, 216, 0.1);
+                             border-radius: 10px;
+                             color: var(--cb-text-primary); 
                              font-size: 0.95rem; 
-                             font-weight: 500; 
-                             --hover-bg: {{ $category->color ?? '#6f42c1' }};
-                           ">
-                            <i class="fas {{ $category->icon ?? 'fa-graduation-cap' }}" style="font-size: 1rem; color: {{ $index === 0 ? '#fb0707ff' : ($category->color ?? '#6f42c1') }};"></i>
+                             font-weight: 600;
+                           "
+                           onmouseover="this.style.background='rgba(5, 0, 216, 0.05)!'; this.style.color='var(--cb-primary)'; this.querySelector('i').style.color='var(--cb-primary)';"
+                           onmouseout="this.style.background='transparent'; this.style.color='var(--cb-text-primary)'; this.querySelector('i').style.color='var(--cb-primary)';"
+                           >
+                            <i class="fas {{ $category->icon ?? 'fa-graduation-cap' }} transition" style="font-size: 1rem; color: var(--cb-primary);"></i>
                             <span>{{ $category->name }}</span>
                         </a>
                     @endforeach
@@ -120,15 +125,15 @@
                                     <span class="badge-cabform" style="background: rgba(var(--cb-accent-rgb), 0.1); color: var(--cb-accent);">{{ $course->level_label }}</span>
                                 </div>
                                 <h5 class="card-title">{{ $course->title }}</h5>
-                                <p class="card-text flex-grow-1">{{ Str::limit($course->description, 100) }}</p>
-                                <div class="d-flex align-items-center justify-content-between mt-3 pt-3" style="border-top: 1px solid var(--cb-glass-border);">
-                                    <div class="d-flex align-items-center gap-2">
+                                <p class="card-text flex-grow-1">{{ Str::limit($course->description, 150) }}</p>
+                                <div class="d-flex align-items-center justify-content-between pt-3" style="border-top: 1px solid var(--cb-glass-border);">
+                                    <!-- <div class="d-flex align-items-center gap-2">
                                         <div class="user-avatar" style="width:30px;height:30px;font-size:0.65rem;">{{ $course->instructor->initials ?? 'CF' }}</div>
                                         <span class="text-cb-muted" style="font-size: 0.8rem;">{{ $course->instructor->full_name ?? 'CabForm' }}</span>
                                     </div>
                                     <div class="text-cb-muted" style="font-size: 0.8rem;">
                                         <i class="fas fa-clock me-1"></i>{{ $course->duration_hours }}h
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <a href="{{ url('/course/' . ($course->slug ?? '#')) }}" class="btn btn-cabform btn-cabform-primary btn-cabform-sm w-100 mt-3">
                                     <i class="fas fa-arrow-right me-1"></i>Voir la formation

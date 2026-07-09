@@ -1,6 +1,6 @@
 /*
 |--------------------------------------------------------------------------
-| CabForm — Global CSS Design System
+| CabForm â€” Global CSS Design System
 |--------------------------------------------------------------------------
 | Couleurs : #0500d8 (Bleu Royal) + #00000f (Noir Profond)
 | Font : DM Sans (Google Fonts)
@@ -8,10 +8,10 @@
 | Style : Premium Dark UI, Glassmorphism, Micro-animations
 */
 
-/* ── Google Fonts ──────────────────────────────────────────────── */
+/* â”€â”€ Google Fonts â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
-/* ── CSS Variables (Design Tokens) ─────────────────────────────── */
+/* â”€â”€ CSS Variables (Design Tokens) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 :root {
     /* Couleurs principales */
     --cb-primary: #0500d8;
@@ -79,7 +79,7 @@
     --cb-container-padding: 0 20px;
 }
 
-/* ── Reset & Base ──────────────────────────────────────────────── */
+/* â”€â”€ Reset & Base â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 *,
 *::before,
 *::after {
@@ -104,7 +104,7 @@ body {
     overflow-x: hidden;
 }
 
-/* ── Typography ────────────────────────────────────────────────── */
+/* â”€â”€ Typography â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     line-height: 1.2;
@@ -164,7 +164,7 @@ a:hover {
     margin: 0 auto 2.5rem;
 }
 
-/* ── Sections ──────────────────────────────────────────────────── */
+/* â”€â”€ Sections â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 section {
     padding: var(--cb-section-padding);
     position: relative;
@@ -182,28 +182,46 @@ section {
     background: var(--cb-gradient-dark);
 }
 
-/* ── Premium Navbar (Edutek Inspired) ───────────────────────────── */
+/* â”€â”€ Premium Navbar (Edutek Inspired) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .navbar-cabform {
-    background: rgba(255, 255, 255, 0.8) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: transparent !important;
     border-bottom: 1px solid rgba(5, 0, 216, 0.05);
     padding: 22px 0;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 1050;
+    position: relative; /* the fixed-top class handles fixed positioning */
+}
+
+.navbar-cabform::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: -1;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .navbar-cabform.scrolled {
-    background: rgba(255, 255, 255, 0.95) !important;
     padding: 12px 0 !important;
-    box-shadow: 0 10px 30px rgba(5, 0, 216, 0.05);
     border-bottom-color: rgba(5, 0, 216, 0.08);
+}
+
+.navbar-cabform.scrolled::before {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 30px rgba(5, 0, 216, 0.05);
 }
 
 .navbar-logo {
     height: 56px;
     width: auto;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    z-index: 1;
 }
 
 @media (max-width: 991.98px) {
@@ -225,6 +243,7 @@ section {
     position: relative;
     transition: color 0.3s ease;
     white-space: nowrap !important;
+    z-index: 1;
 }
 
 .navbar-cabform .nav-link::after {
@@ -370,7 +389,8 @@ section {
     .offcanvas-body {
         display: flex;
         flex-direction: column;
-        padding: 1.5rem 1.5rem 2.5rem 1.5rem !important;
+        /* padding: 1.5rem 1.5rem 2.5rem 1.5rem !important; */
+        overflow-y: auto;
     }
     .offcanvas-body .navbar-nav {
         margin-top: 1.5rem;
@@ -425,7 +445,7 @@ section {
     }
 }
 
-/* ── Buttons ───────────────────────────────────────────────────── */
+/* â”€â”€ Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .btn-cabform {
     padding: 14px 32px;
     border-radius: 0px !important;
@@ -507,7 +527,7 @@ section {
     height: 300px;
 }
 
-/* ── Cards (Glassmorphism) ─────────────────────────────────────── */
+/* â”€â”€ Cards (Glassmorphism) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .card-cabform {
     background: var(--cb-gradient-card);
     backdrop-filter: blur(10px);
@@ -593,7 +613,7 @@ section {
     font-weight: 600;
 }
 
-/* ── Stats Cards ───────────────────────────────────────────────── */
+/* â”€â”€ Stats Cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .stat-card {
     background: var(--cb-glass-bg);
     border: 1px solid var(--cb-glass-border);
@@ -652,14 +672,14 @@ section {
     z-index: 1;
 }
 
-/* ── Hero Section ──────────────────────────────────────────────── */
+/* â”€â”€ Hero Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .hero-section {
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
-    padding: 120px 0 80px;
+    padding: 0px 0 0px;
 }
 
 .hero-section::before {
@@ -708,7 +728,7 @@ section {
     line-height: 1.8;
 }
 
-/* ── Progress Bar ──────────────────────────────────────────────── */
+/* â”€â”€ Progress Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .progress-cabform {
     height: 8px;
     background: rgba(var(--cb-primary-rgb), 0.1);
@@ -739,7 +759,7 @@ section {
     100% { transform: translateX(100%); }
 }
 
-/* ── Form Controls ─────────────────────────────────────────────── */
+/* â”€â”€ Form Controls â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .form-control-cabform,
 .form-control-cabform:focus {
     background: var(--cb-glass-bg);
@@ -768,7 +788,7 @@ section {
     margin-bottom: 0.5rem;
 }
 
-/* ── Badges ────────────────────────────────────────────────────── */
+/* â”€â”€ Badges â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .badge-cabform {
     padding: 5px 14px;
     border-radius: var(--cb-border-radius-pill);
@@ -782,7 +802,7 @@ section {
 .badge-warning { background: rgba(var(--cb-warning-rgb), 0.15); color: var(--cb-warning); }
 .badge-danger { background: rgba(var(--cb-danger-rgb), 0.15); color: var(--cb-danger); }
 
-/* ── Footer ────────────────────────────────────────────────────── */
+/* â”€â”€ Footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .footer-cabform {
     background: var(--cb-dark-secondary);
     border-top: 1px solid var(--cb-glass-border);
@@ -837,7 +857,7 @@ section {
     margin-top: 50px;
 }
 
-/* ── Admin Sidebar ─────────────────────────────────────────────── */
+/* â”€â”€ Admin Sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .sidebar-cabform {
     width: 280px;
     background: var(--cb-dark-secondary);
@@ -915,7 +935,7 @@ section {
     transition: var(--cb-transition);
 }
 
-/* ── Top Bar (Admin / Learner) ─────────────────────────────────── */
+/* â”€â”€ Top Bar (Admin / Learner) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .topbar-cabform {
     background: var(--cb-dark-card);
     backdrop-filter: blur(var(--cb-glass-blur));
@@ -985,7 +1005,7 @@ section {
     font-size: 0.85rem;
 }
 
-/* ── Animations ────────────────────────────────────────────────── */
+/* â”€â”€ Animations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
@@ -1055,7 +1075,7 @@ section {
     display: inline-block;
 }
 
-/* ── Toast Notifications ───────────────────────────────────────── */
+/* â”€â”€ Toast Notifications â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .toast-cabform {
     background: var(--cb-dark-card);
     border: 1px solid var(--cb-glass-border);
@@ -1071,7 +1091,7 @@ section {
     color: var(--cb-text-primary);
 }
 
-/* ── Loading / Spinner ─────────────────────────────────────────── */
+/* â”€â”€ Loading / Spinner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .loader-cabform {
     display: none !important;
 }
@@ -1089,7 +1109,7 @@ section {
     to { transform: rotate(360deg); }
 }
 
-/* ── Scrollbar ─────────────────────────────────────────────────── */
+/* â”€â”€ Scrollbar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -1107,13 +1127,13 @@ section {
     background: var(--cb-primary-dark);
 }
 
-/* ── Selection ─────────────────────────────────────────────────── */
+/* â”€â”€ Selection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 ::selection {
     background: rgba(var(--cb-primary-rgb), 0.3);
     color: var(--cb-text-primary);
 }
 
-/* ── Responsive ────────────────────────────────────────────────── */
+/* â”€â”€ Responsive â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @media (max-width: 991.98px) {
     .sidebar-cabform {
         transform: translateX(-100%);
@@ -1135,7 +1155,7 @@ section {
 @media (max-width: 767.98px) {
     .hero-section {
         min-height: 80vh;
-        padding: 100px 0 60px;
+        padding: 40px 0 60px;
     }
 
     .hero-title {
@@ -1152,7 +1172,7 @@ section {
     }
 }
 
-/* ── Bootstrap Overrides ───────────────────────────────────────── */
+/* â”€â”€ Bootstrap Overrides â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .modal-content {
     background: var(--cb-dark-card);
     border: 1px solid var(--cb-glass-border);
@@ -1272,7 +1292,7 @@ section {
     padding: 0 22px 18px;
 }
 
-/* ── Rating Stars ──────────────────────────────────────────────── */
+/* â”€â”€ Rating Stars â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .rating-stars {
     color: var(--cb-warning);
     font-size: 0.9rem;
@@ -1282,7 +1302,7 @@ section {
     color: var(--cb-text-muted);
 }
 
-/* ── Dashboard Cards ───────────────────────────────────────────── */
+/* â”€â”€ Dashboard Cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .dashboard-card {
     background: var(--cb-gradient-card);
     border: 1px solid var(--cb-glass-border);
@@ -1311,7 +1331,7 @@ section {
 .dashboard-card .card-icon.warning { background: rgba(var(--cb-warning-rgb), 0.12); color: var(--cb-warning); }
 .dashboard-card .card-icon.danger { background: rgba(var(--cb-danger-rgb), 0.12); color: var(--cb-danger); }
 
-/* ── Course Player ─────────────────────────────────────────────── */
+/* â”€â”€ Course Player â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .course-player-sidebar {
     background: var(--cb-dark-secondary);
     border-right: 1px solid var(--cb-glass-border);
@@ -1354,7 +1374,7 @@ section {
     flex-shrink: 0;
 }
 
-/* ── Utility Classes ───────────────────────────────────────────── */
+/* â”€â”€ Utility Classes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .bg-glass { background: var(--cb-glass-bg); backdrop-filter: blur(var(--cb-glass-blur)); }
 .border-glass { border: 1px solid var(--cb-glass-border); }
 .rounded-cb { border-radius: var(--cb-border-radius); }

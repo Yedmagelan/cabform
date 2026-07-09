@@ -19,9 +19,9 @@
                 </button>
             </div>
             
-            <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-stretch align-items-lg-center justify-content-lg-between">
+            <div class="offcanvas-body">
                 <!-- Nav Links (Centered) -->
-                <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0 gap-lg-4">
+                <ul class="navbar-nav justify-content-center flex-grow-1 pe-lg-3 gap-lg-4">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">Accueil</a>
                     </li>
@@ -40,10 +40,9 @@
                 </ul>
 
                 <!-- Auth Section (Custom Desktop/Mobile layouts) -->
-                <div class="auth-section-cabform mt-auto mt-lg-0 ms-lg-4 w-100 w-lg-auto">
+                <div class="auth-section-cabform d-flex align-items-center mt-4 mt-lg-0">
                     @guest
-                        <!-- Desktop Layout -->
-                        <div class="d-none d-lg-flex align-items-center gap-2">
+                        <div class="d-flex flex-column flex-lg-row align-items-stretch align-items-lg-center gap-2 w-100">
                             <a href="{{ route('login') }}" class="btn btn-cabform btn-cabform-primary btn-cabform-sm pulse-glow text-center">
                                 <i class="fas fa-sign-in-alt me-2"></i>Se connecter
                             </a>
@@ -51,21 +50,11 @@
                                 <i class="fas fa-user-plus me-2"></i>Inscrivez-vous
                             </a>
                         </div>
-                        
-                        <!-- Mobile Layout inside offcanvas -->
-                        <div class="d-flex d-lg-none flex-column gap-2 px-3 pb-4">
-                            <a href="{{ route('login') }}" class="btn btn-cabform btn-cabform-primary btn-cabform-sm pulse-glow text-center">
-                                <i class="fas fa-sign-in-alt me-2"></i>Se connecter
-                            </a>
-                            <a href="{{ route('register') }}" class="btn btn-cabform btn-cabform-outline btn-cabform-sm text-center">
-                                <i class="fas fa-plus me-2"></i>Inscrivez-vous
-                            </a>
-                        </div>
                     @else
-                        <div class="dropdown w-100 w-lg-auto px-3 px-lg-0 pb-4 pb-lg-0">
+                        <div class="dropdown w-100">
                             <button class="user-dropdown-trigger-cabform d-flex align-items-center justify-content-between justify-content-lg-start gap-2 w-100 border-0" data-bs-toggle="dropdown" aria-expanded="false">
                                 <div class="d-flex align-items-center gap-2">
-                                    <div class="user-avatar-navbar">{{ auth()->user()->initials }}</div>
+                                    <div class="user-avatar-navbar">{{ auth()->user()->initials ?? substr(auth()->user()->first_name, 0, 1) }}</div>
                                     <span class="user-name-navbar">{{ auth()->user()->first_name }}</span>
                                 </div>
                                 <i class="fas fa-chevron-down arrow-icon" style="font-size: 0.75rem;"></i>
@@ -73,15 +62,15 @@
                             
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-cabform w-100 mt-2">
                                 <div class="px-3 py-2 border-bottom border-light mb-1 d-lg-none">
-                                    <div class="fw-bold" style="font-size: 0.9rem; color: var(--cb-text-primary);">{{ auth()->user()->full_name }}</div>
+                                    <div class="fw-bold" style="font-size: 0.9rem; color: var(--cb-text-primary);">{{ auth()->user()->full_name ?? (auth()->user()->first_name . ' ' . auth()->user()->last_name) }}</div>
                                     <div style="font-size: 0.75rem; color: var(--cb-text-muted);">{{ auth()->user()->email }}</div>
                                 </div>
                                 
-                                @if(auth()->user()->isAdmin())
+                                @if(method_exists(auth()->user(), 'isAdmin') && auth()->user()->isAdmin())
                                     <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}"><i class="fas fa-tachometer-alt me-2 text-cb-primary"></i>Administration</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                 @endif
-                                @if(auth()->user()->isInstructor())
+                                @if(method_exists(auth()->user(), 'isInstructor') && auth()->user()->isInstructor())
                                     <li><a class="dropdown-item" href="{{ route('instructor.dashboard') }}"><i class="fas fa-chalkboard-teacher me-2 text-cb-primary"></i>Espace Formateur</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                 @endif
@@ -92,7 +81,7 @@
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
-                                        <button type="submit" class="dropdown-item text-cb-danger w-100 text-start">
+                                        <button type="submit" class="dropdown-item text-cb-danger w-100 text-start border-0 bg-transparent">
                                             <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
                                         </button>
                                     </form>
